@@ -1,0 +1,46 @@
+<h1><%= t "question_list" %></h1>
+
+<%= paginate @questions %>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <table class="table table-striped table-bordered table-hove no-footer">
+      <thead>
+        <tr>
+          <th><%= t "id" %></th>
+          <th><%= t "content" %></th>
+          <th colspan="2"><%= t "action" %></th>
+          <th><%= t "subject" %></th>
+          <th><%= t "type" %></th>
+          <th><%= t "status" %></th>
+          <th><%= t "created_at" %></th>
+          <th><%= t "updated_at" %></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @questions.each do |question| %>
+          <tr>
+            <td><%= question.id %></td>
+            <td><%= link_to truncate(question.content,length: 20),
+              "#" %></td>
+            <td><%= link_to t("edit"), "#",
+              class: "btn btn-success" %></td>
+            <td><%= link_to t("destroy"), "#",
+              class: "btn btn-danger" %></td>
+            <td><%= question.subject.name %></td>
+            <td><%= question.type %></td>
+            <td>
+              <div class="label label-warning"><%= question.status %></div>
+            </td>
+            <td><%= question.created_at.strftime(t "time_format") %></td>
+            <td><%= question.updated_at.strftime(t "time_format") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+<%= paginate @questions %>
+
+<%= link_to t("new_question"), new_question_path,
+  class: "btn btn-primary" %>
