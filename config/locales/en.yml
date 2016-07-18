@@ -116,6 +116,7 @@ en:
             no-content: "No subject was found !!!"
             action: "Action"
         user:
+          stt: "STT"
           name: "Name "
           email: "Email"
           password: "Password "
