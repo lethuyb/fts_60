@@ -2,14 +2,18 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
     :recoverable, :rememberable, :trackable, :validatable
   devise :omniauthable, omniauth_providers: [:facebook]
-  enum role: [:admin, :user]
 
+  enum role: [:admin, :user]
   has_many :examinations, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_many :questions, dependent: :destroy
 
   mount_uploader :avatar, PictureUploader
   validate  :picture_size
+
+  scope :normal_user, ->{where role: Settings.role_user}
+
+  before_create :normal_user_role
 
   private
   def picture_size
@@ -35,5 +39,9 @@ class User < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def normal_user_role
+    self.role =  Settings.role_user
   end
 end
