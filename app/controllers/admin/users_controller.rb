@@ -6,6 +6,11 @@ class Admin::UsersController < ApplicationController
   def index
     @users =  User.order(created_at: :desc).page(params[:page])
      .per Settings.per_page
+     attributes = %w(id name email current_sign_in_at last_sign_in_at)
+     respond_to do |format|
+      format.html
+      format.csv { render text: @users.to_csv(attributes) }
+    end
   end
 
   def destroy

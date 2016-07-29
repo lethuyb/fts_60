@@ -45,4 +45,13 @@ class User < ActiveRecord::Base
   def normal_user_role
     self.role =  Settings.role_user
   end
+
+  def self.to_csv attributes
+    CSV.generate do |csv|
+      csv << attributes
+      all.each do |user|
+        csv << attributes.map{|attr|user.send(attr)}
+      end
+    end
+  end
 end

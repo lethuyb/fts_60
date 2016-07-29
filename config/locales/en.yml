@@ -101,6 +101,7 @@ en:
           rexamination_delay: "Rexamination delay"
 
     admin:
+      csv: "CSV"
       information_log: "Information log"
       time: "Time"
       logs: "Logs"

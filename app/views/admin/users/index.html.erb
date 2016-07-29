@@ -2,6 +2,7 @@
   <%= t "page.admin.user.title" %>
 <% end %>
 <div class="row">
+  <%= link_to "pade.admin.csv", admin_users_path(format: "csv") %>
   <table class="striped centered highlight" id="table-user">
     <thead>
       <tr>

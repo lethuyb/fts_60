@@ -5,6 +5,10 @@ class Admin::ExaminationsController < ApplicationController
   def index
     @examinations = Examination.includes([:subject, :user]).page(params[:page])
       .per Settings.per_page
+    respond_to do |format|
+      format.html
+      format.csv { render text: @examinations.to_csv }
+    end
   end
 
   def update
